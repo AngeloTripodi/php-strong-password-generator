@@ -15,6 +15,15 @@
 
 <body>
 
+    <?php
+
+    $lowercaseList = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+    $uppercaseList = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
+    $specialcharactersList = ['{', '}', '[', ']', ';', ':', ',', '.', '/', '<', '>', '?', '_', '+', '~', '!', '@', '#', "'", '"',];
+    $numbersList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    ?>
+
     <main>
 
         <form action="./index.php" method="GET">
@@ -23,7 +32,25 @@
         </form>
 
         <?php
-        echo ($_GET['passwordLength']);
+        $passwordLen = $_GET['passwordLength'];
+
+        function getRandomPassword($len)
+        {
+            $password = '';
+            $alpha = 'qwertyuiopasdfghjklzxcvbnmASDFGHJKLZXCVBNMQWERTYUIOP1234567890{}[];:,./<>?_+~!@#"';
+            $alphaLen = strlen($alpha) - 1;
+            // $lowercase = "qwertyuiopasdfghjklzxcvbnm";
+            // $uppercase = "ASDFGHJKLZXCVBNMQWERTYUIOP";
+            // $numbers = "1234567890";
+            // $specialcharacters = "{}[];:,./<>?_+~!@#";
+            for ($i = 0; $i < $len; $i++) {
+                $password .= $alpha[random_int(0, $alphaLen - 1)];
+            }
+            return $password;
+        }
+
+
+        echo getRandomPassword($passwordLen);
         ?>
 
 
